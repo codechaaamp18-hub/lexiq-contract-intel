@@ -41,6 +41,7 @@ if st.button("🚀 Analyze Complex Contract & Sync To Backend"):
                     '{"effective_date": "string", "liability_limit": "string", "party_a": "string", "party_b": "string", "executive_summary": "string"}'
                 )
                 
+                # Query the open-source migration model
                 completion = client.chat.completions.create(
                     model="openai/gpt-oss-20b",
                     messages=[
@@ -50,9 +51,21 @@ if st.button("🚀 Analyze Complex Contract & Sync To Backend"):
                     temperature=0.1
                 )
                 
-                # Parse output fields smoothly
-                raw_output = completion.choices.message.content.strip()
+                # --- SAFE PARSING FIX ---
+                # Check if the response is a dictionary or a list to avoid attribute errors
+                if isinstance(completion, dict):
+                    raw_output = completion["choices"][0]["message"]["content"].strip()
+                elif hasattr(completion, "choices") and len(completion.choices) > 0:
+                    choice = completion.choices[0]
+                    if isinstance(choice, dict):
+                        raw_output = choice["message"]["content"].strip()
+                    else:
+                        raw_output = choice.message.content.strip()
+                else:
+                    raw_output = str(completion)
+                    
                 data = json.loads(raw_output)
+
                 
                 # 3. Cloud Database Integration Layer
                 db_payload = {
