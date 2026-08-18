@@ -37,15 +37,16 @@ if st.button("Run AI Intelligence Analysis"):
                     '{"effective_date": "string", "liability_limit": "string", "party_a": "string", "party_b": "string"}'
                 )
                 
-                # Query the open-source Llama 3 model
+                # Query the open-source Llama model
                 completion = client.chat.completions.create(
-                    model="llama-3.1-8b-instant",
+                    model="llama-3.3-70b-specdec",
                     messages=[
                         {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": contract_text}
+                         {"role": "user", "content": contract_text}
                     ],
-                    temperature=0.1 # Low temperature means consistent, accurate extraction
+                    temperature=0.1 
                 )
+
                 
                 # Parse the response string directly into Python data structures
                 raw_response = completion.choices[0].message.content.strip()
