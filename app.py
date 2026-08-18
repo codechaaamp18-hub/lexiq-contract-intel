@@ -39,7 +39,7 @@ if st.button("Run AI Intelligence Analysis"):
                 
                 # Query the open-source Llama 3 model
                 completion = client.chat.completions.create(
-                    model="llama3-8b-8192",
+                    model="llama-3.1-8b-instant",
                     messages=[
                         {"role": "system", "content": system_prompt},
                         {"role": "user", "content": contract_text}
