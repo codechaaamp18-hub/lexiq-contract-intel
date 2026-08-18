@@ -11,7 +11,7 @@ st.write("An advanced LLM-powered legal data analysis system with a database bac
 # --- AUTOMATIC CREDENTIALS CONFIGURATION ---
 
 GROQ_API_KEY = "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"
-SUPABASE_URL = "https://guxmowzxfvlvwmbclirf.supabase.co"
+SUPABASE_URL = "https://guxmowzxfvlvwmbclirrf.supabase.co"
 SUPABASE_KEY = "sb_publishable_m3_8bIaqewBJFhopXf6FCg_CwtQ8JI_"
 
 # Complex multi-clause real-world legal draft sample
